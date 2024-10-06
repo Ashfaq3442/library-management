@@ -23,16 +23,32 @@
             display: block;
             margin-bottom: 5px;
         }
+        .add-book-btn {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .add-book-btn:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
     <h2>Library Books</h2>
+    
+    <!-- Add Book Button -->
+    <a href="{% url 'add_book' %}" class="add-book-btn">Add New Book</a>
+
     <ul>
         {% for book in books %}
             <li>
-                <strong>Title:</strong> {{ book.title }}
-                <strong>Author:</strong> {{ book.author }}
-                <strong>Description:</strong> {{ book.description }}
+                <strong>Title:</strong> {{ book.title }}<br>
+                <strong>Author:</strong> {{ book.author }}<br>
+                <strong>Description:</strong> {{ book.description }}<br>
             </li>
         {% endfor %}
     </ul>
