@@ -2,13 +2,40 @@
 <html>
 <head>
     <title>Book List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        li strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
     <h2>Library Books</h2>
     <ul>
         {% for book in books %}
-            <li><strong>{{ book.title }}</strong> by {{ book.author }} - {{ book.description }}</li>
+            <li>
+                <strong>Title:</strong> {{ book.title }}
+                <strong>Author:</strong> {{ book.author }}
+                <strong>Description:</strong> {{ book.description }}
+            </li>
         {% endfor %}
     </ul>
 </body>
 </html>
+
