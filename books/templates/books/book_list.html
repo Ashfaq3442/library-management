@@ -9,19 +9,20 @@
         h2 {
             color: #2c3e50;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        li {
-            margin-bottom: 15px;
-            padding: 10px;
-            background-color: #f9f9f9;
+        table, th, td {
             border: 1px solid #ddd;
         }
-        li strong {
-            display: block;
-            margin-bottom: 5px;
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
         }
         .add-book-btn {
             margin-bottom: 20px;
@@ -43,15 +44,25 @@
     <!-- Add Book Button -->
     <a href="{% url 'add_book' %}" class="add-book-btn">Add New Book</a>
 
-    <ul>
-        {% for book in books %}
-            <li>
-                <strong>Title:</strong> {{ book.title }}<br>
-                <strong>Author:</strong> {{ book.author }}<br>
-                <strong>Description:</strong> {{ book.description }}<br>
-            </li>
-        {% endfor %}
-    </ul>
+    <!-- Table of Books -->
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.author }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
 
