@@ -52,6 +52,14 @@
             cursor: pointer;
             border-radius: 5px;
         }
+        .return-btn {
+            padding: 5px 10px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +77,7 @@
                 <th>Author</th>
                 <th>Availability</th>
                 <th>Borrower Details</th>
+                <th>Return</th>
             </tr>
         </thead>
         <tbody>
@@ -89,6 +98,13 @@
                         <strong>Name:</strong> {{ book.borrower_name }}<br>
                         <strong>Contact:</strong> {{ book.borrower_contact }}<br>
                         <strong>Address:</strong> {{ book.borrower_address }}<br>
+                    {% else %}
+                        ---
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not book.is_available %}
+                        <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
                     {% else %}
                         ---
                     {% endif %}
