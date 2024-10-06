@@ -36,10 +36,25 @@
         .add-book-btn:hover {
             background-color: #2980b9;
         }
+        .available-btn {
+            padding: 5px 10px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .unavailable-btn {
+            padding: 5px 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    
     <h2>Library Books</h2>
     
     <!-- Add Book Button -->
@@ -52,6 +67,8 @@
                 <th>Title</th>
                 <th>Description</th>
                 <th>Author</th>
+                <th>Availability</th>
+                <th>Borrower Details</th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +77,22 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.description }}</td>
                 <td>{{ book.author }}</td>
+                <td>
+                    {% if book.is_available %}
+                        <button class="available-btn">Available</button>
+                    {% else %}
+                        <button class="unavailable-btn">Unavailable</button>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not book.is_available %}
+                        <strong>Name:</strong> {{ book.borrower_name }}<br>
+                        <strong>Contact:</strong> {{ book.borrower_contact }}<br>
+                        <strong>Address:</strong> {{ book.borrower_address }}<br>
+                    {% else %}
+                        ---
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
