@@ -52,7 +52,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
-        .return-btn {
+        .return-btn, .borrow-btn {
             padding: 5px 10px;
             background-color: #f39c12;
             color: white;
@@ -77,7 +77,7 @@
                 <th>Author</th>
                 <th>Availability</th>
                 <th>Borrower Details</th>
-                <th>Return</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -106,7 +106,7 @@
                     {% if not book.is_available %}
                         <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
                     {% else %}
-                        ---
+                        <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
                     {% endif %}
                 </td>
             </tr>
