@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        .add-book-btn {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .add-book-btn:hover {
+            background-color: #2980b9;
+        }
+        .available-btn {
+            padding: 5px 10px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .unavailable-btn {
+            padding: 5px 10px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .return-btn, .borrow-btn {
+            padding: 5px 10px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Library Books</h2>
+    
+    <!-- Add Book Button -->
+    <a href="{% url 'add_book' %}" class="add-book-btn">Add New Book</a>
+
+    <!-- Table of Books -->
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Availability</th>
+                <th>Borrower Details</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.description }}</td>
+                <td>{{ book.author }}</td>
+                <td>
+                    {% if book.is_available %}
+                        <button class="available-btn">Available</button>
+                    {% else %}
+                        <button class="unavailable-btn">Unavailable</button>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not book.is_available %}
+                        <strong>Name:</strong> {{ book.borrower_name }}<br>
+                        <strong>Contact:</strong> {{ book.borrower_contact }}<br>
+                        <strong>Address:</strong> {{ book.borrower_address }}<br>
+                    {% else %}
+                        ---
+                    {% endif %}
+                </td>
+                <td>
+                    {% if not book.is_available %}
+                        <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
+                    {% else %}
+                        <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
