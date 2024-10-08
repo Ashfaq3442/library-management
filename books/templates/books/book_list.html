@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book List</title>
+    <title>Library Books</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-        }
-        h2 {
-            color: #2c3e50;
         }
         table {
             width: 100%;
@@ -60,6 +57,20 @@
             cursor: pointer;
             border-radius: 5px;
         }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +78,13 @@
     
     <!-- Add Book Button -->
     <a href="{% url 'add_book' %}" class="add-book-btn">Add New Book</a>
+
+    <!-- Search and Filter Form -->
+    <form method="GET">
+        {{ form.search_title.label_tag }} {{ form.search_title }}
+        {{ form.author.label_tag }} {{ form.author }}
+        <input type="submit" value="Search & Filter">
+    </form>
 
     <!-- Table of Books -->
     <table>
@@ -103,8 +121,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if not book.is_available %}
-                        <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
+                    {% if book.is_available %}
+                        <a href="{% url 'borrow_book' book.id %}" class="borrow-btn">Borrow</a>
                     {% else %}
                         <a href="{% url 'return_book' book.id %}" class="return-btn">Return</a>
                     {% endif %}
